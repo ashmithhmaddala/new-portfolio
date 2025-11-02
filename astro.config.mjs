@@ -1,6 +1,5 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
-import netlify from "@astrojs/netlify";
 import robotsTxt from "astro-robots-txt";
 import UnoCSS from "@unocss/astro";
 import icon from "astro-icon";
@@ -10,20 +9,20 @@ import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://ashmith-maddala.github.io/", // Update with your actual domain
+  site: "https://ashmithhmaddala.github.io",
+  base: "/new-portfolio/",
   integrations: [
     solidJs(),
     sitemap(),
     robotsTxt({
       sitemap: [
-        "https://ashmith-maddala.github.io/sitemap-index.xml",
-        "https://ashmith-maddala.github.io/sitemap-0.xml",
+        "https://ashmithhmaddala.github.io/new-portfolio/sitemap-index.xml",
+        "https://ashmithhmaddala.github.io/new-portfolio/sitemap-0.xml",
       ],
     }),
     UnoCSS({ injectReset: true }),
     icon(),
     svelte(),
   ],
-  output: "server",
-  adapter: netlify({ edgeMiddleware: true }),
+  output: "static",
 });
