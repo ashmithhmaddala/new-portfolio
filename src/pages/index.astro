@@ -7,13 +7,12 @@ import TimeZone from "../components/TimeZoneCard.astro";
 import AboutMe from "../components/AboutMe.astro";
 import Now from "../components/Now.astro";
 import Globe from "../components/Globe";
-import { getCollection } from "astro:content";
+import QuoteCard from "../components/QuoteCard.astro";
 import { formatDate } from "../lib/helpers";
+import { LINKEDIN_POSTS, LINKS } from "../lib/constants";
 
-const posts = (await getCollection("blog"))?.sort(
-  (blogEntryA, blogEntryB) =>
-    (blogEntryB.data.pubDate || new Date()).getTime() -
-    (blogEntryA.data.pubDate || new Date()).getTime()
+const posts = LINKEDIN_POSTS.sort(
+  (postA, postB) => postB.date.getTime() - postA.date.getTime()
 );
 ---
 
@@ -39,11 +38,11 @@ const posts = (await getCollection("blog"))?.sort(
 </script>
 
 <Layout
-  description="I'm a developer based in Italy, passionate about user experience and specializing in engaging animations and micro-interactions. My primary tools of choice include: JavaScript, React, Solid.js, Astro, Svelte, and Node.js."
-  title="Gianmarco Cavallo - Freelance front-end Developer"
+  description="Product Security Intern at Vontier | Cybersecurity enthusiast passionate about ethical hacking, AI-driven security automation, and building secure systems. Expert in penetration testing, vulnerability assessment, and security tooling."
+  title="Ashmith Maddala - Product Security Intern | Cybersecurity Professional"
 >
   <main
-    class="text-white m-auto p-2 grid gap-2 max-w-6xl overflow-hidden relative w-full sm:p-4 sm:gap-2 md:grid-cols-2 md:gap-3 md:p-6 lg:h-screen lg:grid-rows-8 lg:grid-cols-4 lg:gap-4 lg:max-h-[800px]"
+    class="text-white m-auto p-2 grid gap-2 max-w-7xl overflow-hidden relative w-full sm:p-4 sm:gap-2 md:grid-cols-2 md:gap-4 md:p-6 lg:h-screen lg:grid-rows-8 lg:grid-cols-4 lg:gap-5 lg:max-h-[900px]"
   >
     <IntroCard />
     <AboutMe />
@@ -63,44 +62,42 @@ const posts = (await getCollection("blog"))?.sort(
     </Card>
     <Card
       colSpan="md:col-span-1"
-      href="/blog"
       rowSpan="md:row-span-2 flex gap-1"
-      title="Blog"
+      title="LinkedIn Posts"
     >
       <div class="flex flex-col gap-1">
         {
           posts?.slice(0, 3).map((post) => (
-            // <a
-            //   class="text-sm md:text-base decoration-none flex justify-between"
-            //   href={`/blog/${post.id}`}
-            // >
-            <div class="list-none w-full text-neutral-100 hover:text-neutral-400 ease-in-out transition-colors border-b-neutral-400 border-dashed border-b-1 my-0">
-              <p class="inline-block whitespace-nowrap text-xs">
-                {post.data.title}
+            <a
+              class="text-xs decoration-none flex justify-between text-neutral-100 hover:text-neutral-400 ease-in-out transition-colors border-b-neutral-400 border-dashed border-b-1 my-0 py-1"
+              href={post.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <p class="inline-block truncate pr-2 flex-1 min-w-0">
+                {post.title}
               </p>
-              {post.data.pubDate && (
-                <time
-                  class="text-right tabular-nums text-xs"
-                  data-date={post.data.pubDate.toISOString()}
-                  datetime={post.data.pubDate.toISOString()}
-                >
-                  {formatDate(post.data.pubDate)}
-                </time>
-              )}
-            </div>
-            // </a>
+              <time
+                class="text-right tabular-nums text-xs flex-shrink-0 ml-2"
+                data-date={post.date.toISOString()}
+                datetime={post.date.toISOString()}
+              >
+                {formatDate(post.date)}
+              </time>
+            </a>
           ))
         }
+        <a
+          href={LINKS.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs text-neutral-400 hover:text-neutral-200 mt-2"
+          onclick="event.stopPropagation()"
+        >
+          View all posts →
+        </a>
       </div>
     </Card>
-    <Card colSpan="md:col-span-1" rowSpan="md:row-span-1">
-      <p class="text-xs">
-        © 2024 · Crafted with ♥️ using <a
-          class="text-red-500"
-          href="https://astro.build/"
-          target="_blank">Astro</a
-        > by Gianmarco.
-      </p>
-    </Card>
+    <QuoteCard />
   </main>
 </Layout>

@@ -4,68 +4,37 @@ import { LINKS } from "../lib/constants";
 interface Props {
   title: string;
   description: string;
-  page?: "travel" | "blog";
-  slug?: string | undefined;
-  pubDate?: string;
+  page?: "travel";
 }
 
-const { title, description, page, pubDate } = Astro.props;
+const { title, description, page } = Astro.props;
 const image =
   page === "travel"
     ? `${Astro.url.origin}/globe_preview.webp"`
     : `${Astro.url.origin}/og-image.png`;
 
-const schema =
-  page !== "blog"
-    ? {
-        "@context": "http://schema.org",
-        "@type": "Person",
-        name: "Gianmarco",
-        url: Astro.url.origin,
-        sameAs: [LINKS.linkedin, LINKS.github],
-        image: `${Astro.url.origin}/og-image.png`,
-        jobTitle: "Freelance Frontend Developer",
-        worksFor: {
-          "@type": "Organization",
-          name: "Self-Employed",
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: "Italy",
-            addressCountry: "IT",
-          },
-        },
-        nationality: {
-          "@type": "Country",
-          name: "Italy",
-        },
-      }
-    : {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": Astro.url.href,
-        },
-        headline: title || title,
-        description: description || title,
-        image: `${Astro.url.origin}/og-image.png`, //TODO: dynamic
-        author: {
-          "@type": "Person",
-          name: "Gianmarco",
-          url: Astro.url.origin,
-          sameAs: [LINKS.linkedin, LINKS.github],
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "Gianmarco",
-          logo: {
-            "@type": "ImageObject",
-            url: `${Astro.url.origin}/og-image.png`,
-          },
-        },
-        datePublished: pubDate || new Date().toISOString(),
-        dateModified: pubDate || new Date().toISOString(),
-      };
+const schema = {
+  "@context": "http://schema.org",
+  "@type": "Person",
+  name: "Ashmith Maddala",
+  url: Astro.url.origin,
+  sameAs: [LINKS.linkedin, LINKS.github].filter(Boolean),
+  image: `${Astro.url.origin}/og-image.png`,
+  jobTitle: "Product Security Intern",
+  worksFor: {
+    "@type": "Organization",
+    name: "Vontier",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "United States",
+      addressCountry: "US",
+    },
+  },
+  nationality: {
+    "@type": "Country",
+    name: "United States",
+  },
+};
 ---
 
 <!doctype html>
@@ -105,8 +74,14 @@ const schema =
     />
   </head>
   <body
-    class="bg-darkslate-700 md:h-screen flex flex-col justify-center items-center"
+    class="bg-darkslate-700 md:h-screen flex flex-col justify-center items-center relative overflow-hidden"
   >
+    <!-- Animated gradient background -->
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div class="absolute w-[500px] h-[500px] rounded-full blur-[100px] opacity-20 bg-primary-500 animate-pulse" style="top: -250px; left: -250px; animation-duration: 8s;"></div>
+      <div class="absolute w-[600px] h-[600px] rounded-full blur-[120px] opacity-15 bg-primary-400 animate-pulse" style="bottom: -300px; right: -300px; animation-duration: 10s; animation-delay: -2s;"></div>
+      <div class="absolute w-[400px] h-[400px] rounded-full blur-[90px] opacity-10 bg-primary-600 animate-pulse" style="top: 50%; left: 50%; transform: translate(-50%, -50%); animation-duration: 12s; animation-delay: -4s;"></div>
+    </div>
     <slot name="loader" />
     <slot />
   </body>
