@@ -10,7 +10,7 @@ A modern, bento-style portfolio website showcasing my work as a Product Security
 - All in one page (almost)
 - Fully responsive design
 - Performance and SEO optimizations
-- Ready to be deployed on Netlify
+- Ready to be deployed on GitHub Pages or Netlify
 - LinkedIn posts integration
 - Interactive 3D globe visualization
 - Dynamic timezone display
@@ -140,7 +140,7 @@ The 3D globe component displays countries you've visited. Update the countries a
 
 ## License
 
-MIT License - feel free to use this template for your own portfolio
+MIT License
 
 ## Contact
 
@@ -148,7 +148,4 @@ MIT License - feel free to use this template for your own portfolio
 - LinkedIn: [ashmith-maddala](https://www.linkedin.com/in/ashmith-maddala)
 - GitHub: [ashmithhmaddala](https://github.com/ashmithhmaddala)
 
-## Credits
-
-Portfolio template inspired by bento-style portfolio designs.
 

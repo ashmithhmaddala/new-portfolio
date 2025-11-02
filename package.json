@@ -2,6 +2,7 @@
   "name": "astro-bento-portfolio",
   "type": "module",
   "version": "0.0.2",
+  "author": "Ashmith Maddala <ashmith.maddala@gmail.com>",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
